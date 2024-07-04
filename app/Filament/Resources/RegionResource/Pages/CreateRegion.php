@@ -5,6 +5,7 @@ namespace App\Filament\Resources\RegionResource\Pages;
 use App\Filament\Resources\RegionResource;
 use Filament\Actions;
 use Filament\Actions\Action;
+use Filament\Panel;
 use Filament\Resources\Pages\CreateRecord;
 use Illuminate\Contracts\Support\Htmlable;
 
@@ -29,5 +30,9 @@ class CreateRegion extends CreateRecord
                 ->url($this->getResource()::getUrl('index'))
                 ->color('gray'),
         ];
+    }
+
+    public function panel(Panel $panel): Panel{
+        return $panel->path('');
     }
 }
