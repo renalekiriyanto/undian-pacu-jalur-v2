@@ -6,7 +6,9 @@ use App\Filament\Resources\LotteryResource\Pages;
 use App\Filament\Resources\LotteryResource\RelationManagers;
 use App\Models\Arena;
 use App\Models\Lottery;
+use Filament\Actions\ViewAction;
 use Filament\Forms;
+use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
@@ -36,8 +38,10 @@ class LotteryResource extends Resource
                 Hidden::make('slug'),
                 Select::make('arena_id')
                 ->label('Arena')
-                ->options(Arena::all()->pluck('name', 'id'))
-            ]);
+                ->options(Arena::all()->pluck('name', 'id')),
+                DatePicker::make('date')
+                ->label('Tanggal Pertandingan')
+            ])->columns(1);
     }
 
     public static function table(Table $table): Table
@@ -47,12 +51,15 @@ class LotteryResource extends Resource
                 TextColumn::make('name')->label('Nama'),
                 TextColumn::make('arena.name')->label('Arena'),
                 TextColumn::make('arena.district.slug')->label('Kec'),
+                TextColumn::make('date')->label('Tanggal'),
             ])
             ->filters([
                 //
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\ViewAction::make()
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

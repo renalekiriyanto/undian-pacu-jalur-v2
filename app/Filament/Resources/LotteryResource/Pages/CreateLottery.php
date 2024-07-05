@@ -9,4 +9,9 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateLottery extends CreateRecord
 {
     protected static string $resource = LotteryResource::class;
+
+    protected function getRedirectUrl(): string
+    {
+        return $this->getResource()::getUrl('index');
+    }
 }

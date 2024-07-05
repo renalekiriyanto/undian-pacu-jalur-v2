@@ -52,7 +52,7 @@ class CanoeResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('name')
+                TextColumn::make('name')->searchable()
                 ->label('Nama Jalur'),
                 TextColumn::make('region.name')->label('Asal'),
                 TextColumn::make('region.district.slug')->label('Kecamatan')

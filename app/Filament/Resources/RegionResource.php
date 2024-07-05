@@ -47,7 +47,7 @@ class RegionResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('name'),
+                TextColumn::make('name')->searchable(),
                 TextColumn::make('district.name')
                 ->label('District')
             ])
