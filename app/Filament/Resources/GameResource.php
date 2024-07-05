@@ -16,6 +16,7 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\Filter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -49,7 +50,15 @@ class GameResource extends Resource
                 Select::make('jalur_kanan')
                 ->label('Kanan')
                 ->options(Canoe::all()->pluck('name', 'id'))->searchable(),
-
+                Select::make('status')
+                ->label('Status')
+                ->options([
+                    'PENDING' => 'PENDING',
+                    'LIVE' => 'LIVE',
+                    'FAILED' => 'FAILED',
+                    'ANNOUNCEMENT' => 'ANNOUNCEMENT',
+                    'FINISH' => 'FINISH'
+                ])
             ]);
     }
 
@@ -57,12 +66,13 @@ class GameResource extends Resource
     {
         return $table
             ->columns([
+                TextColumn::make('undian.name')
+                ->label('Undian')->searchable(),
                 TextColumn::make('urutan_hilir'),
-                TextColumn::make('name_jalur_kiri.name'),
-                TextColumn::make('name_jalur_kanan.name'),
+                TextColumn::make('name_jalur_kiri.name')->searchable(),
+                TextColumn::make('name_jalur_kanan.name')->searchable(),
             ])->defaultSort('urutan_hilir')
             ->filters([
-                //
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
