@@ -11,7 +11,13 @@ class Lottery extends Model
 
     protected $guarded = ['id'];
 
-    public function arena(){
+    public function arena()
+    {
         return $this->belongsTo(Arena::class, 'arena_id', 'id');
+    }
+
+    public function games()
+    {
+        return $this->hasMany(Game::class, 'lottery_id', 'id');
     }
 }

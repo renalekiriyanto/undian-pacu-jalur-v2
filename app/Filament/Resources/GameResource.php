@@ -32,33 +32,33 @@ class GameResource extends Resource
         return $form
             ->schema([
                 Grid::make()
-                ->schema([
-                    TextInput::make('urutan_hilir')
-                    ->label('Urutan Hilir')
-                    ->numeric()
-                    ->columnSpan(12),
-                ]),
+                    ->schema([
+                        TextInput::make('urutan_hilir')
+                            ->label('Urutan Hilir')
+                            ->numeric()
+                            ->columnSpan(12),
+                    ]),
                 Select::make('lottery_id')
-                ->label('Undian')
-                ->options(Lottery::all()->pluck('name', 'id')),
+                    ->label('Undian')
+                    ->options(Lottery::all()->pluck('name', 'id')),
                 Select::make('lap_id')
-                ->label('Putaran')
-                ->options(Lap::all()->pluck('name', 'id')),
+                    ->label('Putaran')
+                    ->options(Lap::all()->pluck('name', 'id')),
                 Select::make('jalur_kiri')
-                ->label('Kiri')
-                ->options(Canoe::all()->pluck('name', 'id'))->searchable(),
+                    ->label('Kiri')
+                    ->options(Canoe::all()->pluck('name', 'id'))->searchable(),
                 Select::make('jalur_kanan')
-                ->label('Kanan')
-                ->options(Canoe::all()->pluck('name', 'id'))->searchable(),
+                    ->label('Kanan')
+                    ->options(Canoe::all()->pluck('name', 'id'))->searchable(),
                 Select::make('status')
-                ->label('Status')
-                ->options([
-                    'PENDING' => 'PENDING',
-                    'LIVE' => 'LIVE',
-                    'FAILED' => 'FAILED',
-                    'ANNOUNCEMENT' => 'ANNOUNCEMENT',
-                    'FINISH' => 'FINISH'
-                ])
+                    ->label('Status')
+                    ->options([
+                        'PENDING' => 'PENDING',
+                        'LIVE' => 'LIVE',
+                        'FAILED' => 'FAILED',
+                        'ANNOUNCEMENT' => 'ANNOUNCEMENT',
+                        'FINISH' => 'FINISH'
+                    ])
             ]);
     }
 
@@ -67,13 +67,12 @@ class GameResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('undian.name')
-                ->label('Undian')->searchable(),
+                    ->label('Undian')->searchable(),
                 TextColumn::make('urutan_hilir'),
                 TextColumn::make('name_jalur_kiri.name')->searchable(),
                 TextColumn::make('name_jalur_kanan.name')->searchable(),
             ])->defaultSort('urutan_hilir')
-            ->filters([
-            ])
+            ->filters([])
             ->actions([
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),

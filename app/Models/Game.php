@@ -11,19 +11,23 @@ class Game extends Model
 
     protected $guarded = ['id'];
 
-    public function undian(){
+    public function undian()
+    {
         return $this->belongsTo(Lottery::class, 'lottery_id', 'id');
     }
 
-    public function putaran(){
+    public function putaran()
+    {
         return $this->belongsTo(Lap::class, 'lap_id', 'id');
     }
 
-    public function name_jalur_kiri(){
+    public function name_jalur_kiri()
+    {
         return $this->belongsTo(Canoe::class, 'jalur_kiri', 'id');
     }
 
-    public function name_jalur_kanan(){
+    public function name_jalur_kanan()
+    {
         return $this->belongsTo(Canoe::class, 'jalur_kanan', 'id');
     }
 }

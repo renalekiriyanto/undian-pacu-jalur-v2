@@ -10,10 +10,12 @@ use Filament\Forms;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Tabs\Tab;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Forms\Set;
 use Filament\Infolists;
+use Filament\Infolists\Components\TextEntry;
 use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -77,18 +79,19 @@ class LotteryResource extends Resource
         ];
     }
 
-    // public static function infolist(Infolist $infolist): Infolist
-    // {
-    //     return $infolist
-    //         ->schema([]);
-    // }
 
-    protected function mutateFormDataBeforeFill(array $data): array
+    public static function infolist(Infolist $infolist): Infolist
     {
-        $data['user_id'] = auth()->id();
-
-        return $data;
+        return $infolist
+            ->schema([
+                TextEntry::make('games'),
+                TextEntry::make('status_list')
+            ]);
     }
+
+    // protected function mutateFormDataBeforeFill(array $data): array
+    // {
+    // }
 
     public static function getPages(): array
     {
